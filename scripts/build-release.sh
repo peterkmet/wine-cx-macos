@@ -22,6 +22,19 @@ do
     port -q installed "$installed_port" | grep -q '(active)'
 done
 
+# Replaces the MacPorts MoltenVK with the CrossOver build from scripts/build-moltenvk.sh
+replaced=""
+for candidate in /opt/local/lib/libMoltenVK.dylib /opt/local/libexec/MoltenVK/libMoltenVK.dylib
+do
+    if [[ -e "$candidate" ]]; then
+        replaced="$(realpath "$candidate")"
+        install -m 0755 "$repo_root/build/libMoltenVK.dylib" "$replaced"
+        cmp "$repo_root/build/libMoltenVK.dylib" "$replaced"
+        break
+    fi
+done
+test -n "$replaced"
+
 python3 "$repo_root/scripts/package-app.py"
 python3 "$repo_root/scripts/strip-pe.py"
 /usr/bin/xattr -cr "$repo_root/dist/Wine CX.app"

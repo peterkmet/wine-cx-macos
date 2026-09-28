@@ -11,3 +11,11 @@ A standalone Wine app built from the published CrossOver 26.3.0 source. It inclu
 Apple Silicon Macs require installing Rosetta.
 
 If MP3, WMA, or video does not play in a Windows program, install the separate [GStreamer 1.28.5 runtime](https://gstreamer.freedesktop.org/data/pkg/osx/1.28.5/gstreamer-1.0-1.28.5-universal.pkg). MUSHclient's WAV sounds do not need it.
+
+## Fork changes
+
+This fork builds MoltenVK from the CrossOver 26.3.0 sources instead of using the MacPorts MoltenVK. The CrossOver MoltenVK enables geometry shaders. `wined3d` needs them to offer Direct3D feature level 10_0 or higher, which Unity games require.
+
+- `scripts/build-moltenvk.sh` builds MoltenVK with the SPIRV-Cross that the CrossOver sources bundle.
+- `scripts/build-release.sh` replaces the MacPorts `libMoltenVK.dylib` with that build before packaging.
+- A push to `main` builds the app as a workflow artifact only. A release needs a manual run with a tag.
