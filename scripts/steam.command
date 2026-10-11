@@ -15,7 +15,10 @@ if [[ ! -f "$wrapper" ]]; then
     exit 1
 fi
 if [[ -f "$cef/steamwebhelper.exe" ]] && ! cmp -s "$wrapper" "$cef/steamwebhelper.exe"; then
-    mv "$cef/steamwebhelper.exe" "$cef/steamwebhelper_orig.exe"
+    # Only the genuine binary (over 1 MB) is kept; the wrapper is about 17 KB
+    if (( $(stat -f %z "$cef/steamwebhelper.exe") > 1000000 )); then
+        mv "$cef/steamwebhelper.exe" "$cef/steamwebhelper_orig.exe"
+    fi
     cp "$wrapper" "$cef/steamwebhelper.exe"
 fi
 
