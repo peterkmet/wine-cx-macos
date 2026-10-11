@@ -21,7 +21,7 @@ Source repository for moved files: `/Users/lego/github/wine-cross` (private, rea
 - Test list (CLAUDE.md §2). Write a test only for: a check against a reference (original program, golden snapshot), a parser or data format, a rule with more than one outcome that no reference check or type check covers (dates, parsing, prices, state machines), a regression of a real bug (one test per bug). No tests for: constants and data tables; wiring, scaffold, CLI arguments, logging; what the compiler, a linter or a standard check catches; UI and layout (the user tests them manually); what another test already covers. No mutation tests.
 - This change has no code on the test list. The checks are `validate-app.py` in the workflow and the manual checklist.
 - Weakened assertions: none.
-- Approval of the Weakened assertions list (agentic-workflow skill, Planning step 6): pending.
+- Approval of the Weakened assertions list (agentic-workflow skill, Planning step 6): approved by the user on 2026-10-11.
 
 ## Tasks
 
