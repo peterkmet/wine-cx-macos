@@ -4,18 +4,18 @@ PRD: `docs/superpowers/2026-10-11-single-repo.md`
 
 ## Build (GitHub Actions)
 
-- [ ] After the push to `main`, the workflow "Build Wine CX" finishes green.
-- [ ] The log shows `brew install mingw-w64` and the wrapper compile before `scripts/prepare.sh`.
-- [ ] The log does not show `build-moltenvk.sh`.
-- [ ] `validate-app.py` passes both times (the `dist` app and the extracted copy), including the MoltenVK UUID check.
-- [ ] The artifact contains `Wine-CX-26.3.0-macos-x86_64.tar.xz`, `Wine-CX-26.3.0-LICENSES.tar.xz`, `crossover-sources-26.3.0.tar.gz` and `steamwebhelper-wrapper.exe`.
-- [ ] `LICENSES/MoltenVK-Apache-2.0.txt` exists. In `LICENSES/components.json`, MoltenVK has the origin `CrossOver 26.3.0 app`.
-- [ ] `dwarfdump --uuid "Wine CX.app/Contents/Resources/wine/lib/libMoltenVK.dylib"` prints `28CCB7B1-2908-3954-BAD3-9A4B4F8CE4D3`.
+- [x] After the push to `main`, the workflow "Build Wine CX" finishes green.
+- [x] The log shows `brew install mingw-w64` and the wrapper compile before `scripts/prepare.sh`.
+- [x] The log does not show `build-moltenvk.sh`.
+- [x] `validate-app.py` passes both times (the `dist` app and the extracted copy), including the MoltenVK UUID check.
+- [x] The artifact contains `Wine-CX-26.3.0-macos-x86_64.tar.xz`, `Wine-CX-26.3.0-LICENSES.tar.xz`, `crossover-sources-26.3.0.tar.gz` and `steamwebhelper-wrapper.exe`.
+- [x] `LICENSES/MoltenVK-Apache-2.0.txt` exists. In `LICENSES/components.json`, MoltenVK has the origin `CrossOver 26.3.0 app`.
+- [x] `dwarfdump --uuid "Wine CX.app/Contents/Resources/wine/lib/libMoltenVK.dylib"` prints `28CCB7B1-2908-3954-BAD3-9A4B4F8CE4D3`.
 
 ## Release
 
-- [ ] A manual run with a new tag (not `v26.3.0`) creates a release with the four files above.
-- [ ] The release notes name the CrossOver 26.3.0 MoltenVK and the wrapper, and keep the GStreamer line.
+- [x] A manual run with a new tag (not `v26.3.0`) creates a release with the four files above.
+- [x] The release notes name the CrossOver 26.3.0 MoltenVK and the wrapper, and keep the GStreamer line.
 
 ## Fonts
 
