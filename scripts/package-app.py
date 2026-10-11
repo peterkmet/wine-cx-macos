@@ -198,6 +198,7 @@ def copy_legal_files(port_sources: set[Path]) -> None:
     copy_plain(ROOT / "legal/MacPorts-BSD-3-Clause.txt", LEGAL / "MacPorts-BSD-3-Clause.txt")
     copy_plain(ROOT / "legal/Wine-Mono-COPYING.txt", LEGAL / "Wine-Mono-COPYING.txt")
     copy_plain(ROOT / "legal/MPL-2.0.txt", LEGAL / "MPL-2.0.txt")
+    copy_plain(ROOT / "moltenvk/LICENSE", LEGAL / "MoltenVK-Apache-2.0.txt")
     copy_plain(
         ROOT / "ports/emulators/wine-cx/Portfile",
         LEGAL / "source/ports/emulators/wine-cx/Portfile",
@@ -234,6 +235,18 @@ def copy_legal_files(port_sources: set[Path]) -> None:
     owners.add(port_owner(next((PREFIX / "share/wine/mono").rglob("*.dll"))))
     owners.add(port_owner(next((PREFIX / "share/wine/gecko").rglob("xul.dll"))))
     components = [port_metadata(name) for name in sorted(owners)]
+    moltenvk = next((c for c in components if c["name"] == "MoltenVK"), None)
+    if moltenvk is None:
+        moltenvk = {
+            "name": "MoltenVK",
+            "homepage": "https://github.com/KhronosGroup/MoltenVK",
+            "notice_files": [],
+        }
+        components.append(moltenvk)
+    moltenvk.update(
+        {"installed": "CrossOver 26.3.0 app", "origin": "CrossOver 26.3.0 app", "license": "Apache-2.0"}
+    )
+    moltenvk["notice_files"] = sorted({*moltenvk["notice_files"], "MoltenVK-Apache-2.0.txt"})
     (LEGAL / "components.json").write_text(json.dumps(components, indent=2) + "\n")
     (LEGAL / "source.json").write_text(
         json.dumps(

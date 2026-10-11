@@ -147,6 +147,7 @@ for relative in (
     "MacPorts-BSD-3-Clause.txt",
     "Wine-Mono-COPYING.txt",
     "MPL-2.0.txt",
+    "MoltenVK-Apache-2.0.txt",
     "components.json",
     "source.json",
     "wine/COPYING.LIB",
@@ -165,6 +166,22 @@ for expected in ("wine-cx", "mingw-w64-wine-mono-10.4.1", "mingw-w64-wine-gecko-
 for component in components:
     if not component.get("installed") or not component.get("license") or not component.get("homepage"):
         raise RuntimeError(f"Incomplete component metadata: {component}")
+moltenvk = next((c for c in components if c["name"] == "MoltenVK"), None)
+if moltenvk is None or moltenvk.get("origin") != "CrossOver 26.3.0 app":
+    raise RuntimeError(f"MoltenVK origin is not recorded: {moltenvk}")
+
+
+def dylib_uuid(path: Path) -> str:
+    output = subprocess.run(
+        ["/usr/bin/dwarfdump", "--uuid", str(path)], check=True, capture_output=True, text=True
+    ).stdout
+    return output.split("UUID:")[1].split()[0]
+
+
+bundled_uuid = dylib_uuid(WINE / "lib/libMoltenVK.dylib")
+expected_uuid = dylib_uuid(ROOT / "moltenvk/libMoltenVK.dylib")
+if bundled_uuid != expected_uuid:
+    raise RuntimeError(f"MoltenVK UUID differs: app {bundled_uuid}, repository {expected_uuid}")
 
 source = json.loads((LEGAL / "source.json").read_text())
 if source.get("wine_source") != CONFIG["crossover"]:
