@@ -1,0 +1,11 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Wine\Direct3D]
+"cb_access_map_w"=dword:00000001
+
+[HKEY_CURRENT_USER\Software\Wine\Mac Driver]
+"AllowSetGamma"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\FontSubstitutes]
+"Microsoft YaHei"="Source Han Sans SC"
+"SimSun"="Source Han Sans SC"
