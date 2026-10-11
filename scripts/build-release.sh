@@ -22,14 +22,14 @@ do
     port -q installed "$installed_port" | grep -q '(active)'
 done
 
-# Replaces the MacPorts MoltenVK with the CrossOver build from scripts/build-moltenvk.sh
+# Replaces the MacPorts MoltenVK with the MoltenVK of the CrossOver 26.3.0 app
 replaced=""
 for candidate in /opt/local/lib/libMoltenVK.dylib /opt/local/libexec/MoltenVK/libMoltenVK.dylib
 do
     if [[ -e "$candidate" ]]; then
         replaced="$(realpath "$candidate")"
-        install -m 0755 "$repo_root/build/libMoltenVK.dylib" "$replaced"
-        cmp "$repo_root/build/libMoltenVK.dylib" "$replaced"
+        install -m 0755 "$repo_root/moltenvk/libMoltenVK.dylib" "$replaced"
+        cmp "$repo_root/moltenvk/libMoltenVK.dylib" "$replaced"
         break
     fi
 done

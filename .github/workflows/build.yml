@@ -27,7 +27,6 @@ jobs:
           parameters: .github/parameters/setup-macports.yaml
           cache: disable
       - run: scripts/prepare.sh
-      - run: scripts/build-moltenvk.sh
       - run: scripts/build-release.sh
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
