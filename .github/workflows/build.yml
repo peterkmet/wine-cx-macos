@@ -26,10 +26,11 @@ jobs:
         with:
           parameters: .github/parameters/setup-macports.yaml
           cache: disable
+      - run: brew install mingw-w64
+      - run: x86_64-w64-mingw32-gcc -municode -mwindows -O2 -s -o "$RUNNER_TEMP/steamwebhelper-wrapper.exe" scripts/steamwebhelper-wrapper.c
       - run: scripts/prepare.sh
       - run: scripts/build-release.sh
-      - run: brew install mingw-w64
-      - run: x86_64-w64-mingw32-gcc -municode -mwindows -O2 -s -o dist/release/steamwebhelper-wrapper.exe scripts/steamwebhelper-wrapper.c
+      - run: cp "$RUNNER_TEMP/steamwebhelper-wrapper.exe" dist/release/
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: Wine-CX-26.3.0-macos-x86_64
